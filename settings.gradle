@@ -1,3 +1,2 @@
 include ':DeliveryPlace'
 include 'base-libs:BaseLibs'
-include 'base-libs:volley'
