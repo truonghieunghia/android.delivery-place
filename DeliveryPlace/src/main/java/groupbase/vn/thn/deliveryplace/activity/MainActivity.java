@@ -7,12 +7,13 @@ import android.view.MenuItem;
 
 import java.util.ArrayList;
 
+import groupbase.vn.thn.baselibs.common.ActivityCommon;
 import groupbase.vn.thn.baselibs.service.ConnectWS;
 import groupbase.vn.thn.baselibs.service.callback.RequestCallBack;
 import groupbase.vn.thn.deliveryplace.R;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActivityCommon {
 
     private ConnectWS mConnectWS;
     private RequestCallBack<VHCategoryItemList> mRequestCallBack = new RequestCallBack< VHCategoryItemList >() {
@@ -26,36 +27,13 @@ public class MainActivity extends ActionBarActivity {
 
         }
     };
-    @Override
-    protected void onCreate ( Bundle savedInstanceState ) {
 
-        super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_main );
+    @Override
+    protected void init () {
+        setLayout( R.layout.activity_main );
         mConnectWS = new ConnectWS( "http://video-hot.appspot.com/api/category/list" ,this);
         mConnectWS.setRequestCallBack( mRequestCallBack );
         mConnectWS.postRequest();
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu ( Menu menu ) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate( R.menu.menu_main, menu );
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected ( MenuItem item ) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if ( id == R.id.action_settings ) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected( item );
-    }
 }
