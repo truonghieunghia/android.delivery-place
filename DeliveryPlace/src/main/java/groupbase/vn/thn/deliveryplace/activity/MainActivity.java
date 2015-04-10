@@ -32,6 +32,7 @@ public class MainActivity extends ActivityCommon {
     protected void init () {
         setLayout( R.layout.activity_main );
         mConnectWS = new ConnectWS( "http://video-hot.appspot.com/api/category/list" ,this);
+
         mConnectWS.setRequestCallBack( mRequestCallBack );
         mConnectWS.postRequest();
     }
