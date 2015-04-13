@@ -1,5 +1,6 @@
 package groupbase.vn.thn.deliveryplace.activity;
 
+import android.content.DialogInterface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,7 +13,7 @@ import groupbase.vn.thn.baselibs.service.callback.RequestCallBack;
 import groupbase.vn.thn.deliveryplace.R;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements DialogInterface.OnClickListener{
 
     private ConnectWS mConnectWS;
     private RequestCallBack<VHCategoryItemList> mRequestCallBack = new RequestCallBack< VHCategoryItemList >() {
@@ -57,5 +58,10 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected( item );
+    }
+
+    @Override
+    public void onClick(DialogInterface dialog, int which) {
+
     }
 }
