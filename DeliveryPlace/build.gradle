@@ -5,11 +5,7 @@ android {
     buildToolsVersion "21.1.2"
     defaultConfig {
         applicationId "groupbase.vn.thn.deliveryplace"
-<<<<<<< HEAD
         minSdkVersion 17
-=======
-        minSdkVersion 12
->>>>>>> 0a826896f1fe4ef388728eff8fb32fc8725d223e
         targetSdkVersion 21
         versionCode 1
         versionName "1.0"
