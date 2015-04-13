@@ -8,12 +8,17 @@ import android.view.MenuItem;
 
 import java.util.ArrayList;
 
+import groupbase.vn.thn.baselibs.common.ActivityCommon;
 import groupbase.vn.thn.baselibs.service.ConnectWS;
 import groupbase.vn.thn.baselibs.service.callback.RequestCallBack;
 import groupbase.vn.thn.deliveryplace.R;
 
 
+<<<<<<< HEAD
 public class MainActivity extends ActionBarActivity implements DialogInterface.OnClickListener{
+=======
+public class MainActivity extends ActivityCommon {
+>>>>>>> 0a826896f1fe4ef388728eff8fb32fc8725d223e
 
     private ConnectWS mConnectWS;
     private RequestCallBack<VHCategoryItemList> mRequestCallBack = new RequestCallBack< VHCategoryItemList >() {
@@ -27,16 +32,17 @@ public class MainActivity extends ActionBarActivity implements DialogInterface.O
 
         }
     };
-    @Override
-    protected void onCreate ( Bundle savedInstanceState ) {
 
-        super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_main );
+    @Override
+    protected void init () {
+        setLayout( R.layout.activity_main );
         mConnectWS = new ConnectWS( "http://video-hot.appspot.com/api/category/list" ,this);
+
         mConnectWS.setRequestCallBack( mRequestCallBack );
         mConnectWS.postRequest();
     }
 
+<<<<<<< HEAD
 
     @Override
     public boolean onCreateOptionsMenu ( Menu menu ) {
@@ -64,4 +70,6 @@ public class MainActivity extends ActionBarActivity implements DialogInterface.O
     public void onClick(DialogInterface dialog, int which) {
 
     }
+=======
+>>>>>>> 0a826896f1fe4ef388728eff8fb32fc8725d223e
 }
