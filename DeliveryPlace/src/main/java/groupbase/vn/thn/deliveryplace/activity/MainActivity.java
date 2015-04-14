@@ -1,16 +1,10 @@
 package groupbase.vn.thn.deliveryplace.activity;
 
-import android.content.DialogInterface;
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 import groupbase.vn.thn.baselibs.common.ActivityCommon;
 import groupbase.vn.thn.baselibs.common.AdapterCommon;
