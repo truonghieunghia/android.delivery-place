@@ -5,71 +5,68 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import groupbase.vn.thn.baselibs.common.ActivityCommon;
+import groupbase.vn.thn.baselibs.common.AdapterCommon;
+import groupbase.vn.thn.baselibs.listener.AdapterBaseListener;
 import groupbase.vn.thn.baselibs.service.ConnectWS;
 import groupbase.vn.thn.baselibs.service.callback.RequestCallBack;
+import groupbase.vn.thn.baselibs.view.ImageViewNetWork;
 import groupbase.vn.thn.deliveryplace.R;
 
-
-<<<<<<< HEAD
-public class MainActivity extends ActionBarActivity implements DialogInterface.OnClickListener{
-=======
-public class MainActivity extends ActivityCommon {
->>>>>>> 0a826896f1fe4ef388728eff8fb32fc8725d223e
+public class MainActivity extends ActivityCommon implements AdapterBaseListener<VHCategoryItemData,MainActivity.HolderView>{
 
     private ConnectWS mConnectWS;
-    private RequestCallBack<VHCategoryItemList> mRequestCallBack = new RequestCallBack< VHCategoryItemList >() {
+    private AdapterCommon adapter ;
+    private ListView lst;
+    private ArrayList<VHCategoryItemData> lstData = new ArrayList<>( );
+    private RequestCallBack<VHCategoryItemList> mRequestCallBack = new RequestCallBack<VHCategoryItemList>() {
         @Override
-        public void onResult ( VHCategoryItemList data ) {
-
+        public void onResult( VHCategoryItemList data ) {
+            lstData = data.getCategoryList();
+            adapter = new AdapterCommon<VHCategoryItemData>( getApplicationContext(),R.layout.cell,lstData);
+            adapter.setAdapterBaseListener( MainActivity.this);
+            lst.setAdapter( adapter );
         }
 
         @Override
-        public void onResultArray ( ArrayList< VHCategoryItemList > data ) {
+        public void onResultArray( ArrayList<VHCategoryItemList> data ) {
 
         }
     };
 
     @Override
-    protected void init () {
+    protected void init() {
         setLayout( R.layout.activity_main );
-        mConnectWS = new ConnectWS( "http://video-hot.appspot.com/api/category/list" ,this);
-
+        lst = (ListView) findViewById( R.id.listView);
+        mConnectWS = new ConnectWS( "http://video-hot.appspot.com/api/category/list", this );
         mConnectWS.setRequestCallBack( mRequestCallBack );
         mConnectWS.postRequest();
+
     }
 
-<<<<<<< HEAD
 
     @Override
-    public boolean onCreateOptionsMenu ( Menu menu ) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate( R.menu.menu_main, menu );
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected ( MenuItem item ) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if ( id == R.id.action_settings ) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected( item );
+    public HolderView setHolderView( final View view ) {
+        HolderView holderView = new HolderView();
+        holderView.name = (TextView)view.findViewById( R.id.textView);
+        holderView.image = (ImageViewNetWork)view.findViewById( R.id.imageView);
+        return holderView;
     }
 
     @Override
-    public void onClick(DialogInterface dialog, int which) {
-
+    public void showData( final VHCategoryItemData data, final HolderView holderView, final int position ) {
+        holderView.name.setText( data.getName());
+        holderView.image.requestImage("http://l.f29.img.vnecdn.net/2015/04/14/MATTHAN1-4329-1428939538_1428978949_1428978961_490x294.jpg" );
     }
-=======
->>>>>>> 0a826896f1fe4ef388728eff8fb32fc8725d223e
+    public class HolderView {
+        TextView name;
+        ImageViewNetWork image;
+    }
 }
