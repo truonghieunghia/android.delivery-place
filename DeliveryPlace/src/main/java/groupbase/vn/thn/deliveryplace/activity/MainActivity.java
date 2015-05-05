@@ -11,6 +11,7 @@ import groupbase.vn.thn.baselibs.common.AdapterCommon;
 import groupbase.vn.thn.baselibs.listener.AdapterBaseListener;
 import groupbase.vn.thn.baselibs.service.ConnectWS;
 import groupbase.vn.thn.baselibs.service.callback.RequestCallBack;
+import groupbase.vn.thn.baselibs.util.Param;
 import groupbase.vn.thn.baselibs.view.ImageViewNetWork;
 import groupbase.vn.thn.deliveryplace.R;
 
@@ -20,17 +21,17 @@ public class MainActivity extends ActivityCommon implements AdapterBaseListener<
     private AdapterCommon adapter ;
     private ListView lst;
     private ArrayList<VHCategoryItemData> lstData = new ArrayList<>( );
-    private RequestCallBack<VHCategoryItemList> mRequestCallBack = new RequestCallBack<VHCategoryItemList>() {
+    private RequestCallBack<FollowList> mRequestCallBack = new RequestCallBack<FollowList>() {
         @Override
-        public void onResult( VHCategoryItemList data ) {
-            lstData = data.getCategoryList();
-            adapter = new AdapterCommon<VHCategoryItemData>( getApplicationContext(),R.layout.cell,lstData);
-            adapter.setAdapterBaseListener( MainActivity.this);
-            lst.setAdapter( adapter );
+        public void onResult( FollowList data ) {
+//            lstData = data.getCategoryList();
+//            adapter = new AdapterCommon<VHCategoryItemData>( getApplicationContext(),R.layout.cell,lstData);
+//            adapter.setAdapterBaseListener( MainActivity.this);
+//            lst.setAdapter( adapter );
         }
 
         @Override
-        public void onResultArray( ArrayList<VHCategoryItemList> data ) {
+        public void onResultArray( ArrayList<FollowList> data ) {
 
         }
     };
@@ -39,9 +40,10 @@ public class MainActivity extends ActivityCommon implements AdapterBaseListener<
     protected void init() {
         setLayout( R.layout.activity_main );
         lst = (ListView) findViewById( R.id.listView);
-        mConnectWS = new ConnectWS( "http://video-hot.appspot.com/api/category/list", this );
-        mConnectWS.setRequestCallBack( mRequestCallBack );
-        mConnectWS.postRequest();
+        mConnectWS = new ConnectWS( "http://auctions.yahooapis.jp/v1/follow/public/chkyj_ex_nht24oyu?appid=dj0zaiZpPTZSNEZWZ1hZTTc2TSZzPWNvbnN1bWVyc2VjcmV0Jng9NDc-&start=1&results=20&sort=new&old=1", this );
+        mConnectWS.setRequestCallBack(mRequestCallBack);
+        mConnectWS.setRequestType(ConnectWS.RequestType.XML);
+        mConnectWS.getRequest(false);
 
     }
 
